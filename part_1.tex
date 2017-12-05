@@ -10,10 +10,17 @@
 		\subsection{Définition}
 			Le système de Vigenère est une méthode de chiffrement ayant une clé de longueur variable, inférieure ou égale à celle du message à transmettre. Lorsqu'on parle de système de Vigenère, on pense à l'utiliser dans le cadre de l'alphabet français, qui ne comporte que 26 caractères, mais il est possible d'étendre cet algorithme pour utiliser toutes les valeurs possibles de l'ASCII, ou même de l'Unicode.
 		\subsection{Algorithme}
-			Cet algorithme de chiffrement est réputé pour être très simple à mettre en \oe{uvre.}, et efficace à l'exécution, car le temps que prendra cet algorithme à chiffrer un caractère ne dépend ni de la longueur de la clé, ni de celle du message. La courbe représentant le temps que prendrait le chiffrement d'un message en fonction du nombre de caractères serait donc une droite, ce qui montre que cet algorithme est d'une complexité linéaire de l'ordre de O(n) où n est la longueur du message à chiffrer.\linebreak
-			Pour chiffrer un message en utilisant le système de Vigenère, il faut considérer qu'un message de longueur n est formé de caractères ayant des indices variant entre 0 et n - 1 dans un tableau. On considère la clé de la même façon. Pour obtenir le caractère chiffré à l'indice i, on effectue l'opération suivante :
-			
+			Cet algorithme de chiffrement est réputé pour être très simple à mettre en \oe{uvre.}, et efficace à l'exécution, car le temps que prendra cet algorithme à chiffrer un caractère ne dépend ni de la longueur de la clé, ni de celle du message. La courbe représentant le temps que prendrait le chiffrement d'un message en fonction du nombre de caractères serait donc une droite, ce qui montre que cet algorithme est d'une complexité linéaire de l'ordre de O(n) où n est la longueur du message à chiffrer.\\
+			Pour chiffrer un message en utilisant le système de Vigenère, il faut considérer qu'un message de longueur n est formé de caractères ayant des indices variant entre 0 et n - 1 dans un tableau. On considère la clé de la même façon. On obtient le caractère du message chiffré à l'indice i, noté C\lbrack{i}\rbrack, de la manière suivante :\linebreak
+			\\
+			C\lbrack{i}\rbrack = (M\lbrack{i}\rbrack + K\lbrack{i \% l}\rbrack) \% j\\
+			\\
+			où M\lbrack{i}\rbrack est le caractère à l'indice i du message initial M (on rappelle que l'indice varie entre 0 et n - 1), l est la longueur de la clé de chiffrement, K\lbrack{i \% l}\rbrack est le caractère de la clé de chiffrement à l'indice i modulo l, et j est le nombre de caractères codables dans le message initial. Dans le cadre de cette formule, on définit également l'opérateur \% comme l'opérateur renvoyant le reste de la division euclidienne de la partie gauche par la partie droite.\\
+			L'opération peut être inversée pour obtenir le message initial à partir du message chiffré C et de la clé de chiffrement K, en utilisant la formule suivante :\\
+			\\
+			M\lbrack{i}\rbrack = (C\lbrack{i}\rbrack - K\lbrack{i}\rbrack + j) \% j
 		\subsection{Niveau de sécurité}
+			Dans le cas où la clé de chiffrement est de taille supérieure (inutile) ou égale à la longueur du message, et ne contient pas de répétitions, cet algorithme est réputé pour chiffrer des données de manière inviolable, c'est-à-dire qu'il est impossible de retrouver les données d'origine si on n'a aucune information sur ces dernières, car les données obtenues ressembleront à des données purement aléatoires. En pratique, cette méthode de chiffrement est employée avec une clé de taille inférieure à la taille du message. Dans ce cas-là, il est possible de pratiquer une cryptanalyse si l'on connaît la nature des données initiales. Pour plus d'informations, se référer à la partie sur la cryptanalyse du système de Vigenère.
 		\subsection{Cas d'utilisation}
 	\section{Système de César}
 	\section{Système de substitution}
