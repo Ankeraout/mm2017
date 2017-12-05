@@ -1,4 +1,16 @@
 \chapter{Cryptanalyse}
+	\section{Définition}
+		La cryptanalyse est la science qui consiste à déchiffrer un message chiffré, c’est-à-dire tenter de déchiffrer ce message sans posséder la clé de chiffrement. Le processus par lequel on tente de comprendre un message en particulier est appelé une attaque.
 	\section{Cryptanalyse du système de César}
+		Le système de César est un cas particulier du système de Vigenère, très facile à attaquer si l’on connaît la langue du texte d’origine. Il suffit d’analyser les fréquences, et considérer que la lettre qui revient le plus fréquemment est la lettre la plus fréquente dans la langue du message. Par exemple en français, on va considérer que la lettre qui revient le plus souvent est un ‘E’. En connaissant ceci, il est facile de retrouver le décalage qui a servi à chiffrer le message.
 	\section{Cryptanalyse du système de Vigenère}
+		Afin de décrypter un message chiffré en utilisant le système de Vigenère, il faut tout d’abord déterminer la longueur de la clé qui a servi à chiffrer le message. Pour cela, on utilise un outil appelé l’indice de coïncidence.
+		Il s’agit d’un outil de cryptanalyse, inventé par William F. Friedman, un cryptologue de l’armée de terre américaine en 1920. Il représente la probabilité, pour un texte donné, que deux lettres prises au hasard dans ce texte soient les mêmes.
+		En français, il vaut environ 0.746 (ou 0.778, selon les sources).
+		Lors de notre cryptanalyse, on va tester tous les découpages de textes avec un espacement entre les caractères variant dans l’intervalle [m; n] où m et n sont des entiers naturels différents de zéro (m >= n), minorant et majorant la taille de la clé de chiffrement. Pour chaque découpage, on calcule la moyenne des indices de coïncidence de tous les textes, et on retient, pour chaque valeur de découpage, l’indice de coïncidence. La longueur probable de la clé est donc le découpage qui donne un indice de coïncidence le plus proche de l’indice de coïncidence du texte donné.
 	\section{Cryptanalyse du système de substitution}
+		Pour décrypter un message du système de substitution, il est 
+		nécessaire de faire une analyse fréquentielle afin de déterminer
+		quelles lettres du texte crypté font référence à quelle lettre de l'alphabet. Dans la mesure où nous connaissons la langue du texte chiffré ou que nous le déterminons grâce à l'analyse fréquentielle.  
+		
+		
