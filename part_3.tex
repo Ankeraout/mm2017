@@ -1,6 +1,21 @@
 \chapter{Nombres premiers}
 	\section{Génération des nombres premiers}
-		\subsection{Le crible d'Eratosthène}
+		\subsection{Le crible d'Ératosthène}
+			Pour trouver tous les nombres premiers entre 2 et n, on commence par créer une liste contenant tous ces nombres.
+			On commence en prenant le premier nombre de la liste, qui est 2. On retire de la liste tous ses multiples à part lui-même (4, 6, 8…). On répète l’expérience en prenant 3, puis 5, etc..
+			Lorsqu’on a pris un nombre supérieur à la racine carrée de n, on ne retirera plus aucun nombre de la liste ; il est donc de ce fait inutile de continuer.
+			À ce stade-là, il ne reste dans la liste que les nombres premiers entre 0 et n. Cette méthode permet à coup sûr de trouver tous les nombres premiers entre 0 et n, mais elle est très coûteuse en terme de mémoire (tableau), et de processeur car on itère sur tous les nombres premiers.
+			\subsubsection{Algorithme}
+				\begin{lstlisting}
+Fonction Eratosthene(Limite)
+  L = liste des entiers de 2 a Limite
+  Tant que L est non vide
+    Afficher le premier entier de L
+    L = liste des entiers de L non multiples du premier
+  Fin tant que
+Fin fonction
+				\end{lstlisting}
 		\subsection{Le test de primalité de Fermat}
+			
 		\subsection{Essais de division}
 	\section{Densité des nombres premiers}
