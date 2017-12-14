@@ -22,6 +22,19 @@
 		\subsection{Niveau de sécurité}
 			Dans le cas où la clé de chiffrement est de taille supérieure (inutile) ou égale à la longueur du message, et ne contient pas de répétitions, cet algorithme est réputé pour chiffrer des données de manière inviolable, c'est-à-dire qu'il est impossible de retrouver les données d'origine si on n'a aucune information sur ces dernières, car les données obtenues ressembleront à des données purement aléatoires. En pratique, cette méthode de chiffrement est employée avec une clé de taille inférieure à la taille du message. Dans ce cas-là, il est possible de pratiquer une cryptanalyse si l'on connaît la nature des données initiales. Pour plus d'informations, se référer à la partie sur la cryptanalyse du système de Vigenère.
 		\subsection{Cas d'utilisation}
+			D'abord, dans le cas courant, on considère le système de Vigenère comme permettant de coder un message dans un alphabet donné. Si l'on considère que l'alphabet en question est formé de 256 caractères, alors il est possible de coder des octets, car un octet peut prendre $2^8 = 256$ valeurs différentes. En réalité, le système de Vigenère n'est pas considéré comme suffisamment sécurisé pour chiffrer des données sensibles, car pour que ces dernières soient transmises de manière totalement sécurisée, il faudrait que la clé soit aussi longue que le message à coder, ce qui ne présente aucun intérêt. On préfèrera des algorithmes plus sécurisés avec des longueurs de clés moindres.
 	\section{Système de César}
+		\subsection{Définition}
+			Le système de César est un cas particulier du système de Vigenère, où la clé est de longueur 1, c'est-à-dire que la clé utilisée pour encoder chaque caractère sera toujours la même. Il constitue également un cas partiuclier du système de chiffrement par substitution, où les lettres de la clé seraient écrites avec un décalage d'un nombre fixe de positions par rapport à l'alphabet normal. La clé serait donc l'alphabet utilisé pour écrire le message, décalé du nombre susdit.
+			La manière dont on chiffre des données en utilisant ce système est la même que pour le système de Vigenère. Il s'agit donc d'une méthode de chiffrement symétrique.
+		\subsection{Niveau de sécurité}
+			Le niveau de sécurité de cette méthode de chiffrement est très faible, c'est-à-dire qu'il est très facile de retrouver le message d'origine si l'on connaît la nature de ce dernier. La cryptanalyse du système de César est d'ailleurs utilisée dans la cryptanalyse du système de Vigenère, que nous aborderons plus tard.
+		\subsection{Cas d'utilisation}
+			L'histoire raconte que le chiffrement de César, comme son nom l'indique, a été initialement inventé par Jules César, un grand empereur de l'époque de l'antiquité. Il aurait employé cette méthode pour transmettre des messages à ses troupes, de manière à ce que même si le message était intercepté par un ennemi, ce dernier ne pourrait pas le comprendre, en raison d'abord de la langue d'origine qui était différente, mais aussi du fait que les suites de lettres inscrites sur le support formaient des mots qui n'existaient pas. Le décalage qu'il employait valait 3, c'est-à-dire que pour chaque lettre du message, il fallait regarder 3 lettres plus loin dans l'alphabet pour trouver la lettre à écrire pour chiffrer le message. Par exemple, lorsque le message à chiffrer contenait un 'A', César écrivait donc un 'D'.
+			De nos jours, du fait de son niveau de sécurité, le chiffrement de César n'est plus utilisé pour chiffrer des données sensibles. En revanche, il constitue un exemple parfait pour une initiation à la cryptographie, car il demeure très simple à comprendre, et le fait qu'il soit symétrique facilite la compréhension.
 	\section{Système de substitution}
+		\subsection{Définition}
+		\subsection{Algorithme}
+		\subsection{Niveau de sécurité}
+		\subsection{Cas d'utilisation}
 	\section{Algorithme RSA}
