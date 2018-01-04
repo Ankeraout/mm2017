@@ -1,5 +1,14 @@
 \chapter{Le chiffrement RSA}
 	\section{L'algorithme de chiffrement RSA}
+		Pour mettre en place le système de chiffrement RSA il faut commencer par créer une clé privé. Pour ce faire, il faut choisir deux grands nombres premiers \textbf{p} et \textbf{q} puis obtenir \textbf{n}, produit de ces deux nombres (\textbf{n = p.q}). Pour finir, il nous faut obtenir \textbf{e}, où \textbf{e = (p-1).(q-1)}. Cette clé privé servira à déchiffrer les messages chiffrés à l'aide de la clé publique. Cette clé publique est tout simplement le couple (\textbf{n}, \textbf{e}).
+		Pour chiffrer un message il faut tout d'abord le découper en plusieurs bloc supérieur à 2.
+		\\\\\textbf{Exemple}\\
+		Pour le mot "RSA", convertissons chaque lettres par sa place dans l’alphabet : "RSA" deviens donc "18 19 00". Or le découpage n'est que de deux pour chaque bloc, réajustons le résultat obtenu pour obtenir des blocs de 3, ce qui donne : "181 900". Il suffit ensuite de transformer chaque blocs non chiffrés \textbf{B} en blocs chiffrés \textbf{C} en utilisant la formule \textbf{C = B\up{e} mod n}. Le message chiffré sera le résultat de tout les blocs chiffrés. 
 	\section{Niveau de sécurité}
+		Tout l'intérêt du système RSA repose sur le fait qu'à l'heure actuelle il est pratiquement impossible de retrouver dans un temps raisonnable p et q à partir de n si celui-ci est très grand. La personne qui détient la clé privé est donc la seule à pouvoir déchiffrer le message dans un temps raisonnable. De plus, elle n'a jamais à transmettre les entiers p et q, ce qui empêche leur piratage.
+		
 	\section{Efficacité}
+		Une des grandes forces du RSA et qu'il est incroyablement rapide et encore bien protégé à actuellement (en utilisant à minima 2048 bits).
+		
 	\section{Cas d'utilisation}
+		Le chiffrement RSA est maintenant utilisé dans quasiment tout les systèmes qui nécessitent le chiffrement de données. On peut par exemple retrouver son utilisation dans le système bancaire, les cartes cartes SIM, etc.
