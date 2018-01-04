@@ -25,11 +25,16 @@ Fin fonction
 		Il existe plusieurs preuves du fait qu'il existe une infinité de nombres premiers. Nous allons ici présenter une preuve de ce fait, par l'absurde :\\
 		On suppose qu'il existe une quantité $n$ finie de nombres premiers $p_i$ : $p_1$, $p_2$, $...$, $p_n$.\\
 		On forme un nouveau nombre $N$, produit de tous les nombres premiers, auquel on ajoute $1$ : $N = (p_1 \times p_2 \times ... \times p_n)$\\
-		Il y a 2 cas possibles :\\
+		Il y a 2 cas possibles :
 		\begin{itemize}
 			\item Soit N est premier, auquel cas il existe $n + 1$ nombres premiers, ce qui est impossible puisque l'on est parti de l'hypothèse qu'il n'existe que $n$ nombres premiers.
 			\item Soit N n'est pas premier, auquel cas il est divisible par un nombre premier $q$.
 		\end{itemize}
 		Or on sait que N n'est divisible par aucun des nombres premiers de la liste, car le reste de la division euclidienne de N par l'un des nombres premiers sera toujours $1$, puisque quelque soit $i$, $N \cong 1 [p_i]$\\
 		Or si $q$ existe, cela signifie qu'il y a donc $n + 1$ nombres premiers, soit encore un de plus que dans notre hypothèse de départ.\\
-		Tous les cas ont été explorés, et tous mènent à la conclusion que l'hypothèse de départ est fausse. Autrement dit, il y a un nombre infini de nombres premiers.
+		Tous les cas ont été explorés, et tous mènent à la conclusion que l'hypothèse de départ est fausse. Autrement dit, il y a un nombre infini de nombres premiers.\\
+		\\
+		Bien qu'il existe un nombre infini de nombres premiers, ces derniers ne sont pas uniformément répartis dans l'ensemble des entiers naturels, c'est-à-dire que la proportion de nombres premiers dans un intervalle de longueur $m$ commençant à 0 ne sera pas la même pour tout $m$. Cette proportion tend vers $0$ quand $m$ tend vers $+\infty$.\\
+		Par exemple, la proportion de nombres premiers dans l'intervalle $[0;100[$ est de $25\%$.\\
+		Dans l'intervalle $[0;1000[$, elle n'est plus que de $16,8\%$, et plus $m$ croît, plus cette proportion décroît dans des proportions étrangement proches de la fonction $\frac{1}{ln(n)}$ comme on peut le constater sur le diagramme suivant :\\
+		\includegraphics{prop_premier.png}
