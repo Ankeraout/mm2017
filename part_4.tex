@@ -1,7 +1,34 @@
 \chapter{Le chiffrement RSA}
 	\section{L'algorithme de chiffrement RSA}
-		Pour mettre en place le système de chiffrement RSA il faut commencer par créer une clé privé. Pour ce faire, il faut choisir deux grands nombres premiers \textbf{p} et \textbf{q} puis obtenir \textbf{n}, produit de ces deux nombres (\textbf{n = p.q}). Pour finir, il nous faut obtenir \textbf{e}, où \textbf{e = (p-1).(q-1)}. Cette clé privé servira à déchiffrer les messages chiffrés à l'aide de la clé publique. Cette clé publique est tout simplement le couple (\textbf{n}, \textbf{e}).
-		Pour chiffrer un message il faut tout d'abord le découper en plusieurs bloc supérieur à 2.
+		RSA est un algorithme de chiffrement qui nécessite une mise en place avant de pouvoir échanger des messages. Du fait qu'il s'agisse d'un algorithme de chiffrement asymétrique, les deux parties doivent faire ce travail de mise en place pour créer deux canaux de communication (l'un ascendant, l'autre descendant), afin que les deux parties puissent échanger entre elles, car sinon il s'agirait d'une communication à sens unique.\\
+		\\
+		Pour initialiser le chiffrement RSA, il faut commencer par générer une clé privée. Pour cela, on prend deux nombres premiers (de préférence très grands), strictement supérieurs à 2, qu'on appelle $p$ et $q$.\\
+		\\
+		On calcule ensuite leur produit $n = p \times q$. On appelle ce nombre le module de chiffrement. Il constitue la moitié des clés de chiffrement.\\
+		\\
+		On prend ensuite $\phi{n} = (p - 1) \times (q - 1)$.\\
+		Maintenant que nous avons fait ces calculs, nous pouvons chercher l'exposant de chiffrement (appelé $e$), qui soit un nombre premier avec $\phi{n}$ et strictement inférieur à celui-ci. De plus, ce nombre doit être strictement supérieur à $p$ et à $q$. Ce dernier constitue la deuxième moitié de la clé de chiffrement, qu'on appellera clé publique, puisque c'est celle que l'on donnera à l'autre partie afin qu'elle puisse chiffrer son message. Il existe généralement plusieurs possibilités, il faut en choisir une au hasard (de préférence).\\
+		\\
+		On calcule enfin $d = \frac{1}{e} \% \phi{n}$. Il constitue la deuxième moitié de la clé de déchiffrement, que nous appellerons clé privée, car c'est celle que la partie doit conserver secrètement afin de déchiffrer les messages envoyés par l'autre partie en utilisant la clé publique qu'on lui aura préalablement envoyé.\\
+		\\
+		Maintenant que nous avons terminé l'initialisation, nous pouvons transmettre le couple (n; e) à la partie qui souhaite envoyer un message (ce couple constituant la clé publique), et conserver précieusement le couple (n; d), qui constitue la clé privée.\\
+		\\
+		Pour chiffrer un message, la partie souhaitant envoyer le message doit faire un calcul. À l'aide de l'algorithme RSA, nous pouvons envoyer des nombres. Soit $M$ le message (le nombre à envoyer), $e$ et $n$ les composants du couple (n; e).\\
+		\\
+		Le résultat de l'opération de chiffrement de $M$ est appelé $C$, et il vaut\\
+		\\
+		$C = M^e \% n$.\\
+		\\
+		Ce nombre peut donc nous être envoyé, et nous pouvons retrouver le nombre initial à l'aide du couple (n; d) de cette manière :\\
+		\\
+		$M = C^d \% n$\\
+		\\
+		On peut, en utilisant cette méthode, envoyer des séries de nombres. Dans la réalité, on transmet des octets via RSA. Or les octets ne peuvent prendre que des valeurs allant de 0 à 255 (inclus).\\
+		\\
+		Si l'on chiffre un octet en utilisant cette méthode, il n'y aura donc que 256 possibilités, et le chiffrement RSA reviendrait alors à un chiffrement par substitution. Il serait alors facile de retrouver le message initial, pour peu que l'on connaisse sa nature.\\
+		Dans la réalité, le chiffrement de données par RSA n'est pas réalisé de cette manière (que l'on peut qualifier de naïve).\\
+		\\
+		Pour chiffrer un message, il faut tout d'abord le découper en plusieurs blocs supérieur à 2.
 		\\\\\textbf{Exemple}\\
 		Pour le mot "RSA", convertissons chaque lettres par sa place dans l’alphabet : "RSA" deviens donc "18 19 00". Or le découpage n'est que de deux pour chaque bloc, réajustons le résultat obtenu pour obtenir des blocs de 3, ce qui donne : "181 900". Il suffit ensuite de transformer chaque blocs non chiffrés \textbf{B} en blocs chiffrés \textbf{C} en utilisant la formule \textbf{C = B\up{e} mod n}. Le message chiffré sera le résultat de tout les blocs chiffrés. 
 	\section{Niveau de sécurité}
