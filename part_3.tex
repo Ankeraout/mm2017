@@ -16,7 +16,7 @@ Fonction Eratosthene(Limite)
 Fin fonction
 				\end{lstlisting}
 		\subsection{Le test de primalité de Fermat}
-			Le test de primalité de Fermat est un procédé permettant de déterminer très rapidement si un nombre n'est pas premier. Le problème de cette méthode est que ce test ne permet pas de déterminer à coup sûr si un nombre n'est pas premier, cependant la probabilité qu'un nombre ayant passé le test de Fermat (donc un nombre pseudo-premier) ne soit pas premier est faible ; et il est possible de répéter ce test avec des valeurs différentes pour diminuer encore plus cette dernière.\\
+			Le test de primalité de Fermat est un procédé permettant de déterminer très rapidement si un nombre a de grandes chances d'être premier ou non. Le problème de cette méthode est que ce test ne permet pas de déterminer à coup sûr si un nombre est premier, cependant la probabilité qu'un nombre ayant passé le test de Fermat (donc un nombre pseudo-premier) ne soit pas premier est faible ; et il est possible de répéter ce test avec des valeurs différentes pour diminuer encore plus cette dernière.\\
 			Rappelons donc que le petit théorème de Fermat dit que pour $p$ premier et $a$ un entier non divisible par $p$, alors $a^{p-1} - 1$ est un multiple de p. Autrement dit, $a^{p-1}-1\cong{0}$ $[p]$.\\
 			Ceci nous permet d'affirmer que si on prend $a$ un nombre entier naturel strictement supérieur à 1, et $p$ un nombre au hasard, si la formule précédente n'est pas vraie, alors on peut affirmer que $p$ n'est pas un nombre premier. En revanche, si la formule précédente est vraie, on ne peut pas affirmer que $p$ est un nombre premier, mais seulement qu'il s'agit d'un nombre pseudo-premier. Il est possible de répéter le test de primalité de Fermat avec des différentes valeurs de $a$ successivement, pour un même nombre $p$ testé, afin de renforcer la probabilité que $p$ soit premier, s'il passe tous les tests de primalité de Fermat. Nous avons produit une implémentation en Java, dans le fichier $TestFermat.java$.
 		\subsection{Essais de division}
@@ -24,7 +24,7 @@ Fin fonction
 	\section{Densité des nombres premiers}
 		Il existe plusieurs preuves du fait qu'il existe une infinité de nombres premiers. Nous allons ici présenter une preuve de ce fait, par l'absurde :\\
 		On suppose qu'il existe une quantité $n$ finie de nombres premiers $p_i$ : $p_1$, $p_2$, $...$, $p_n$.\\
-		On forme un nouveau nombre $N$, produit de tous les nombres premiers, auquel on ajoute $1$ : $N = (p_1 \times p_2 \times ... \times p_n)$\\
+		On forme un nouveau nombre $N$, produit de tous les nombres premiers, auquel on ajoute $1$ : $N = (p_1 \times p_2 \times ... \times p_n) + 1$\\
 		Il y a 2 cas possibles :
 		\begin{itemize}
 			\item Soit N est premier, auquel cas il existe $n + 1$ nombres premiers, ce qui est impossible puisque l'on est parti de l'hypothèse qu'il n'existe que $n$ nombres premiers.

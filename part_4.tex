@@ -25,7 +25,7 @@
 		\\
 		On peut, en utilisant cette méthode, envoyer des séries de nombres. Dans la réalité, on transmet des octets via RSA. Or les octets ne peuvent prendre que des valeurs allant de 0 à 255 (inclus).\\
 		\\
-		Si l'on chiffre un octet en utilisant cette méthode, il n'y aura donc que 256 possibilités, et le chiffrement RSA reviendrait alors à un chiffrement par substitution. Il serait alors facile de retrouver le message initial, pour peu que l'on connaisse sa nature.\\
+		Si l'on chiffre un octet en utilisant cette méthode, il n'y aura donc que 256 possibilités, et le chiffrement RSA reviendrait alors à un chiffrement par substitution. Il serait alors facile de retrouver le message initial, par cryptanalyse.\\
 		Dans la réalité, le chiffrement de données par RSA n'est pas réalisé de cette manière (que l'on peut qualifier de naïve).\\
 		\\
 		Pour chiffrer un message, il faut tout d'abord le découper en plusieurs blocs supérieur à 2.
