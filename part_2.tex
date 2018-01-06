@@ -42,7 +42,62 @@ LE PERSONNAGE DU LIVRE S'APPELLE BENOIT
 		Afin de décrypter un message chiffré en utilisant le système de Vigenère, il faut tout d’abord déterminer la longueur de la clé qui a servi à chiffrer le message. Pour cela, on utilise un outil appelé l’indice de coïncidence.
 		Il s’agit d’un outil de cryptanalyse, inventé par William F. Friedman, un cryptologue de l’armée de terre américaine en 1920. Il représente la probabilité, pour un texte donné, que deux lettres prises au hasard dans ce texte soient les mêmes.
 		En français, il vaut environ 0.746 (ou 0.778, selon les sources).
-		Lors de notre cryptanalyse, on va tester tous les découpages de textes avec un espacement entre les caractères variant dans l’intervalle [m; n] où m et n sont des entiers naturels différents de zéro (m >= n), minorant et majorant la taille de la clé de chiffrement. Pour chaque découpage, on calcule la moyenne des indices de coïncidence de tous les textes, et on retient, pour chaque valeur de découpage, l’indice de coïncidence. La longueur probable de la clé est donc le découpage qui donne un indice de coïncidence le plus proche de l’indice de coïncidence du texte donné.
+		Lors de notre cryptanalyse, on va tester tous les découpages de textes avec un espacement entre les caractères variant dans l’intervalle [m; n] où m et n sont des entiers naturels différents de zéro (m >= n), minorant et majorant la taille de la clé de chiffrement. Pour chaque découpage, on calcule la moyenne des indices de coïncidence de tous les textes, et on retient, pour chaque valeur de découpage, l’indice de coïncidence. La longueur probable de la clé est donc le découpage qui donne un indice de coïncidence le plus proche de l’indice de coïncidence du texte donné.\\
+		\\
+		Prenons en exemple le texte suivant :
+		\begin{lstlisting}
+cbntjdefhccavtvfdvfbpufdftgnzqwkysdufwcnfjguznzutvtlveony
+byvldcfupipfovtxgdglxfdcdgfibyvncywjogyhtrmtvpofkippewnzu
+pgewykfrtthpvodctrleudqfjpeuogdsnifeuzincfdgwzpjfokdhtehf
+goswrtegroyfhccavtvrfkqotkqludsczolrpfnlvyopgdrhpflbdlolw
+efpdfduluprmztdefvmlecmakprtldszfcgyrfenpudorvjykyhpcmtit
+pwvblwefphvpsfwovecqthpcmpgdhfkjwkdspufawtgwroekbitkfxctg
+nvsectbpjepupgxvusqosdcfdrwidznaqchleupuncxdfwcnfjguzicoa
+yjpcdmxvuckbipubegyhovmlhtbolwtprhtvnputsncf
+		\end{lstlisting}
+		C'est le message que Alice souhaite envoyer à Bob, mais que Oscar a intercepté. Il sait que le texte est écrit en français, et puisqu'il n'arrive pas à un résultat concluant à l'aide d'une cryptanalyse du système de César, il décide de tenter une cryptanalyse pour un système de Vigenère.\\
+		\\
+		Tout d'abord, Oscar va découper le texte $T$ en $n$ sous-textes $s_i$ où $i$ est le numéro du sous-texte (partant de zéro) en prenant dans $s_i$ les lettres du texte initial dont la position $p$ (partant de zéro) est une solution de l'équation $p \% n = i$, c'est-à-dire que si on découpe $T$ en 3 parties, on mettra dans $s_1$ la deuxième lettre de $T$, puis la 5$^{eme}$ etc, car $1 \% 3 = 1$, $4 \% 3 = 1$, etc.\\
+		\\
+		Une fois ce découpage fait, il va calculer l'indice de coïncidence de chacun des sous-textes et en faire la moyenne. Il va ensuite réitérer l'opération plusieurs fois afin de tester plusieurs découpages, afin de constituer un tableau des indices de coïncidence en fonction des découpages. Voici ce que Oscar obtient pour ce texte en ayant testé les découpages de 2 à 10 :\\
+		\begin{tabular}{ | c | c | c | c | c | c | c | c | }
+			\hline
+Découpage (n) & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\ \hline
+Indice de coïncidence & 0.045 & 0.044 & 0.043 & 0.044 & 0.044 & 0.080 & 0.043 \\
+			\hline
+		\end{tabular} \\
+		\\
+		Oscar remarque que l'indice de coïncidence pour le découpage en 7 textes est très proche de celui du français (0.075 environ) comparé aux autres. Il en déduit que la clé doit être de longueur 7.\\
+		\\
+		Maintenant qu'il connaît la longueur de la clé, il conserve ses sous-textes et effectue une cryptanalyse de César dessus pour retrouver chacun des caractères de la clé. À la fin de ce processus, il obtient la clé "rblczdl".\\
+		En déchiffrant le message en utilisant cette clé, Oscar a un texte partiellement illisible :
+		\begin{lstlisting}
+lacrkatograbsieestgyedesdudciplizpsdelaocyptolariesatflchant
+marotegqcdesmeedagesaedurantoznfidezeialitqluthenftciteeftnt
+egrueeensauoantsoggentdeepcretsafclesexwesedieeinguepplastes
+lnograbsiequirlitpaseprinapqccuunmqdsagedmysunaufcemessmreal
+orebuelacdjptogrmahierezounmeselgeinizeelligumleaaufcequeqgt
+dedroueelleeeeutiliepedepuudlanticfitemaudcertauyesdesqdmeth
+oppslespxfsimpodeantesozmmelaocyptogdlphieaejmetricfedatezed
+elafuyduvinseiemesupcle
+		\end{lstlisting}
+		Il reconnaît pourtant au début du texte "La cryptographie". En modifiant un peu sa clé pour retrouver "La cryptographie" au début du texte, Oscar arrive à avoir ce texte :
+		\begin{lstlisting}
+lacryptographieestunedesdisciplinesdelacryptologiesattachant
+aprotegerdesmessagesassurantconfidentialiteauthenticiteetint
+egriteensaidantsouventdesecretsouclesellesedistinguedelasteg
+anographiequifaitpasserinapercuunmessagedansunautremessageal
+orsquelacryptographierendunmessageinintelligibleaautrequequi
+dedroitelleestutiliseedepuislantiquitemaiscertainesdesesmeth
+odeslesplusimportantescommelacryptographieasymetriquedatentd
+elafinduvingtiemesiecle
+		\end{lstlisting}
+		Oscar arrive donc à lire ce texte, qui, après quelque mise en forme, est rendu parfaitement lisible :
+		"La cryptographie est une des disciplines de la cryptologie s’attachant à protéger des messages, assurant confidentialité, authenticité et intégrité en s’aidant souvent de secrets, ou clés.
+		Elle se distingue de la stéganographie qui fait passer inaperçu un message dans un autre message, alors que la cryptographie rend un message inintelligible à autre que qui-de-droit.
+		Elle est utilisée depuis l’antiquité, mais certaines des méthodes les plus importantes, comme la cryptographie asymétrique, datent de la fin du vingtième siècle."\\
+		\\
+		Oscar a donc réussi à déchiffrer le message d'Alice, car le texte était suffisamment long pour se prêter à l'expérience, mais aussi parce qu'il connaissait la langue d'origine du texte.
 	\section{Cryptanalyse du système de substitution}
 		Pour décrypter un message du système de substitution, il est 
 		nécessaire de faire une analyse fréquentielle afin de déterminer
