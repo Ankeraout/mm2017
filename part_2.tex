@@ -1,8 +1,43 @@
 \chapter{Cryptanalyse}
 	\section{Définition}
 		La cryptanalyse est la science qui consiste à déchiffrer un message chiffré, c’est-à-dire tenter de déchiffrer ce message sans posséder la clé de chiffrement. Le processus par lequel on tente de comprendre un message en particulier est appelé une attaque.
+	\section{Aparté : Alice et Bob}
+		Lorsqu'on explique par la pratique un algorithme de chiffrement, on l'explique en utilisant l'exemple de deux personnes, Alice et Bob, Alice souhaitant envoyer un message à Bob. Pour l'anecdote, ces prénoms ont été choisis par Ron Rivest, dans un article présentant l'algorithme RSA en 1978. Il a choisi de donner des prénoms à ses personnages afin que son explication soit plus claire que s'il avait employé des noms génériques (personne A et personne B, par exemple).\\
+		Dans les exemples que nous allons présenter dans cette partie, nous prendrons donc cet exemple.\\
+		Imaginons deux élèves à l'école, Alice et Bob. Alice souhaite discuter avec Bob en classe, via un moyen de communication rudimentaire mais néanmoins fonctionnel : le passage d'un morceau de papier d'élève en élève avec un message écrit dessus. Le problème, c'est que le message qu'Alice souhaite transmettre est strictement confidentiel, et que chaque élève peut décider d'ouvrir le papier et d'en lire le contenu. Alice doit donc trouver avec Bob un moyen de rendre le message inintelligible par ses camarades de classe.\\
+		Le seul problème, c'est que Oscar, l'un de leurs camarades, se trouve être le meilleur élève de la classe, et il connaît la plupart des stratagèmes que pourraient utiliser ses camarades. Nous allons donc voir comment il fait pour réussir malgré tout à lire le message.
 	\section{Cryptanalyse du système de César}
-		Le système de César est un cas particulier du système de Vigenère, très facile à attaquer si l’on connaît la langue du texte d’origine. Il suffit d’analyser les fréquences, et considérer que la lettre qui revient le plus fréquemment est la lettre la plus fréquente dans la langue du message. Par exemple en français, on va considérer que la lettre qui revient le plus souvent est un ‘E’. En connaissant ceci, il est facile de retrouver le décalage qui a servi à chiffrer le message.
+		Le système de César est un cas particulier du système de Vigenère, très facile à attaquer si l’on connaît la langue du texte d’origine. Il suffit d’analyser les fréquences, et considérer que la lettre qui revient le plus fréquemment est la lettre la plus fréquente dans la langue du message. Par exemple en français, on va considérer que la lettre qui revient le plus souvent est un ‘E’. En connaissant ceci, il est facile de retrouver le décalage qui a servi à chiffrer le message.\\
+		\\
+		Voici un exemple concret :\\
+		Imaginons que Alice ait envoyé le message suivant à Bob :
+		\begin{lstlisting}
+OH SHUVRQQDJH GX OLYUH V'DSSHOOH EHQRLW.
+		\end{lstlisting}
+		Oscar sait que la lettre que l'on retrouve le plus fréquemment dans un texte écrit en français est la lettre E.
+		Il va donc calculer les fréquences d'apparition des lettres dans le message :\\
+		\begin{tabular}{ | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | }
+			\hline
+			Lettre & A & B & C & D & E & F & G & H & I & J & K & L & M & N & O\\ \hline
+			Fréquence & 0 & 0 & 0 & 2 & 1 & 0 & 1 & 7 & 0 & 1  & 0 & 2 & 0 & 0 & 4\\
+			\hline
+		\end{tabular}\\
+		\\
+		\begin{tabular}{ | c | c | c | c | c | c | c | c | c | c | c | c | }
+			\hline
+			Lettre & P & Q & R & S & T & U & V & W & X & Y & Z\\ \hline
+			Fréquence & 0 & 3 & 2 & 3 & 0 & 2 & 2 & 1 & 1 & 1 & 0\\
+			\hline
+		\end{tabular}\\
+		\\
+		Oscar remarque alors que la lettre qui revient le plus fréquemment est la lettre H. Il va donc regarder le décalage entre la lettre E et la lettre H. Il s'agit d'un décalage de 3 positions.\\
+		Oscar se met donc à réécrire le message, en prenant pour chaque lettre, la lettre située 3 positions avant dans l'alphabet. S'il tombe sur une lettre dont la position est inférieure ou égale au décalage calculé, il revient à la lettre Z (par exemple, la lettre B donnera Y).\\
+		\\
+		À la fin de son opération, Oscar trouve un message écrit en français, parfaitement intelligible :
+		\begin{lstlisting}
+LE PERSONNAGE DU LIVRE S'APPELLE BENOIT
+		\end{lstlisting}
+		Oscar a donc réussi à casser facilement le chiffrement que Alice avait appliqué à son message.
 	\section{Cryptanalyse du système de Vigenère}
 		Afin de décrypter un message chiffré en utilisant le système de Vigenère, il faut tout d’abord déterminer la longueur de la clé qui a servi à chiffrer le message. Pour cela, on utilise un outil appelé l’indice de coïncidence.
 		Il s’agit d’un outil de cryptanalyse, inventé par William F. Friedman, un cryptologue de l’armée de terre américaine en 1920. Il représente la probabilité, pour un texte donné, que deux lettres prises au hasard dans ce texte soient les mêmes.
