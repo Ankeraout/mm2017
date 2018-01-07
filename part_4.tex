@@ -28,17 +28,31 @@
 		Si l'on chiffre un octet en utilisant cette méthode, il n'y aura donc que 256 possibilités, et le chiffrement RSA reviendrait alors à un chiffrement par substitution. Il serait alors facile de retrouver le message initial, par cryptanalyse.\\
 		Dans la réalité, le chiffrement de données par RSA n'est pas réalisé de cette manière (que l'on peut qualifier de naïve).\\
 		\\
+		Pour chiffrer un message à l'aide de RSA, il faut le découper en "blocs".\\
+		Ces blocs sont des nombres strictement inférieurs à n.\\
+		Pour les constituer, il faut écrire le message à envoyer sous la forme d'une série de nombres, et on découpe cette série de nombres en un ensemble de blocs inférieurs à $n$. Ceci étant assez difficile à expliquer, voici un exemple :\\
+		Imaginons qu'on ait un chiffrement RSA avec n=283189.\\
+		Imaginons également que l'on veuille envoyer le message "MESSAGE". Pour cela, on va l'écrire sous la forme d'une série de nombres, en convertissant chaque caractère du message en sa valeur ASCII. Comme ASCII est un codage qui emploie des nombres allant jusqu'à 3 chiffres en base 10, on écrira les nombres obtenus sur 3 chiffres. On obtiendra alors quelque chose de ce genre :\\
+		077 069 083 083 065 071 069\\
+		\\
+		On crée, à partir de cette série de chiffres, une série de nombres "blocs", strictement inférieurs à $n$ :\\
+		077069 083083 065071 069000\\
+		\\
+		Ce sont ces nombres que l'on chiffrera grâce à l'algorithme RSA.\\
+		\\
+		Lors du déchiffrement, ces nombres seront reconvertis en valeurs numériques en prenant des blocs de 3 chiffres par 3, pour reconstituer ensuite les valeurs ASCII et retrouver le message original.\\
+		C'est grâce à ce processus que le message est sécurisé lors de sa transmission, car le chiffrement ne revient alors plus à un chiffrement par substitution, et il y a alors n blocs codables, ce qui fait que l'on utilisera pleinement les possibilités qu'offre RSA.\\
 		Pour chiffrer un message, il faut tout d'abord le découper en plusieurs blocs supérieur à 2.
-		\\\\\textbf{Exemple}\\
-		Pour le mot "RSA", convertissons chaque lettres par sa place dans l’alphabet : "RSA" deviens donc "18 19 00". Or le découpage n'est que de deux pour chaque bloc, réajustons le résultat obtenu pour obtenir des blocs de 3, ce qui donne : "181 900". Il suffit ensuite de transformer chaque blocs non chiffrés \textbf{B} en blocs chiffrés \textbf{C} en utilisant la formule \textbf{C = B\up{e} mod n}. Le message chiffré sera le résultat de tout les blocs chiffrés. 
 	\section{Niveau de sécurité}
-		Tout l'intérêt du système RSA repose sur le fait qu'à l'heure actuelle il est pratiquement impossible de retrouver dans un temps raisonnable p et q à partir de n si celui-ci est très grand. La personne qui détient la clé privé est donc la seule à pouvoir déchiffrer le message dans un temps raisonnable. De plus, elle n'a jamais à transmettre les entiers p et q, ce qui empêche leur piratage.
-		
-		
+		RSA étant un algorithme de chiffrement asymétrique, la clé permettant de déchiffrer un message chiffré en utilisant cet algorithme (clé privée) n'est jamais transmise. Or il est impossible de déchiffrer un message intercepté si on ne possède pas la clé privée de la personne qui était supposée recevoir ce message (et le déchiffrer). C'est grâce à cela que RSA est un algorithme particulièrement réputé par sa sécurité.\\
+		RSA n'est pourtant pas un algorithme invulnérable, car pour le casser, il "suffit" de factoriser la valeur $n$, commune aux clés privées et publiques d'un échange RSA.\\
+		En factorisant $n$, le tiers ayant intercepté le message devient capable de reconstituer la clé privée permettant de déchiffrer le message.\\
+		Seulement, la factorisation de $n$ est un processus excessivement compliqué si les nombres $p$ et $q$ sont des nombres premiers très grands.\\
+		À l'heure actuelle, en raison de la relative faible puissance de nos ordinateurs, il est très difficile de factoriser un très grand nombre composé si ses constituants sont de très grands nombres premiers.
 	\section{Efficacité}
-		Une des grandes forces du RSA et qu'il est encore bien protégé à l'heure actuelle (en utilisant à minima 2048 bits). Cependant ce système de chiffrement n'est pas une fin en soit. Il reste tout de même très long d'exécution et ne permet donc pas le chiffrement de très grands messages.\\
-		
-		Exemple du temps d'exécution de l'algorithme RSA-2048\\
+		Une des grandes forces du RSA et qu'il est encore bien protégé à l'heure actuelle (en utilisant à minima 2048 bits). Cependant ce système de chiffrement n'est pas une fin en soi. Il possède plusieurs désavantages, notamment sa lenteur et sa consommation de mémoire, qui augmentent avec la grandeur des nombres qu'il manipule. Plus on avance dans le temps, et plus cet algorithme devient donc consommateur de ressources. Il permet malgré tout le chiffrement de messages de manière très fiable, et en général il est plutôt utilisé pour sécurisé l'échange de clés pour des algorithmes de chiffrement symétriques, beaucoup plus rapides et moins gourmands en terme de ressources système.\\
+		\\
+		Pour se rendre compte de l'impact de cet algorithme sur les performances, voici un test de chiffrement de fichiers en utilisant RSA avec une clé de 2048 bits sur un ordinateur bas/moyen de gamme :\\
 			Test effectué avec :\\
 			- Processeur : Intel(R) Core(TM) 2 CPU T5200 1,6GHZ.\\
 			- RAM : 1,00 Go.\\
@@ -47,8 +61,13 @@
 				- 21621ms de temps d'exécution\\\\ 
 			Pour un fichier de 9,16Mo :\\
 				- 74583ms de temps d'exécution\\
-				
-		
 	\section{Cas d'utilisation}
 		Le chiffrement RSA est maintenant utilisé dans quasiment tout les systèmes qui nécessitent le chiffrement de données. On peut par exemple retrouver son utilisation dans le système bancaire, le web, les cartes à puces, etc..
-		Comme dit précédemment, le RSA étant bien trop coûteux en terme de temps de chiffrement, il est principalement utilisé pour chiffrer de très grandes clés de chiffrements symétrique et ce sont ces clés qui serviront à chiffrer l'information.
+		Comme dit précédemment, le RSA étant bien trop coûteux en terme de temps de chiffrement, il est principalement utilisé pour chiffrer des clés pour des algorithmes de chiffrement symétrique et ce sont ces derniers qui serviront à chiffrer l'information.\\
+		\\
+		Parmi les utilisations les plus courantes de cet algorithme, il y a également les certificats.\\
+		Pour résumer, un certificat est un fichier permettant d'identifier de manière sûre une entité. Ils sont envoyés à chaque visite d'un site web, afin de s'assurer que la personne qui nous envoie la page est bien le site que l'on demande, grâce à la complicité d'un tiers de confiance (une autre entité validant l'identité du site web).\\
+		\\
+		Le certificat comporte au minimum une signature du site, chiffrée grâce à sa clé privée (et non publique), et déchiffrable par tout le monde grâce à une clé publique, elle aussi contenue dans le certificat. Cela permet de s'assurer que la signature contenue dans le certificat a bien été créée par la bonne entité, car sa modification est impossible étant donné que seule la clé privée permettrait cela, et elle n'est pas distribuée.\\
+		\\
+		Dans le cadre d'une communication Web, le protocole utilisé est TLS, et ce dernier exige un certificat afin de créer le tunnel de données sécurisé.
