@@ -37,7 +37,9 @@ Fin fonction
 		Bien qu'il existe un nombre infini de nombres premiers, ces derniers ne sont pas uniformément répartis dans l'ensemble des entiers naturels, c'est-à-dire que la proportion de nombres premiers dans un intervalle de longueur $m$ commençant à 0 ne sera pas la même pour tout $m$. Cette proportion tend vers $0$ quand $m$ tend vers $+\infty$.\\
 		Par exemple, la proportion de nombres premiers dans l'intervalle $[0;100[$ est de $25\%$.\\
 		Dans l'intervalle $[0;1000[$, elle n'est plus que de $16,8\%$, et plus $m$ croît, plus cette proportion décroît dans des proportions étrangement proches de la fonction $\frac{1}{ln(n)}$ comme on peut le constater sur le graphique suivant :\\
-		\includegraphics{prop_premier.png}
-		La proportion de nombres premiers a été calculée à l'aide d'une application créée par nos soins. Elle est, sur ce graphique, exprimée en pourcentage, et les valeurs indiquées sur le graphique sont calculées à partir de m=1000 jusqu'à m=100000. Les pourcentages indiqués ici représentent donc la proportion de nombres premiers dans l'intervalle $[0; m]$.\\
+		\includegraphics{prop_premier.png}\\
+		La proportion de nombres premiers (en bleu) a été calculée à l'aide d'une application créée par nos soins. Elle est, sur ce graphique, exprimée en pourcentage, et les valeurs indiquées sur le graphique sont calculées à partir de m=1000 jusqu'à m=100000. Les pourcentages indiqués ici représentent donc la proportion de nombres premiers dans l'intervalle $[0; m]$.\\
+		La courbe orange représente, elle, la courbe de la fonction f(x) = $\frac{100}{ln(x)}$.\\
+		\\
 		On peut constater que les courbes sont effectivement très proches, et en réalité elles le sont de plus en plus, puisque l'écart entre les deux est en moyenne décroissant. Les deux courbes tendent donc l'une vers l'autre de manière asymptotique.
 		Dans l'utilisation de RSA, la partie la plus critique est la génération de nombres premiers très grands, or on sait maintenant qu'ils se raréfient au fur et à mesure que l'on cherche des nombres premiers plus grands. C'est là l'une des problématiques de RSA.
