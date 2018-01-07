@@ -99,5 +99,57 @@ elafinduvingtiemesiecle
 		\\
 		Oscar a donc réussi à déchiffrer le message d'Alice, car le texte était suffisamment long pour se prêter à l'expérience, mais aussi parce qu'il connaissait la langue d'origine du texte.
 	\section{Cryptanalyse du système de substitution}
-		Pour décrypter un message chiffré par un système de substitution, on va effectuer une analyse fréquentielle des lettres de ce texte.
-		
+		Pour décrypter un message chiffré par un système de substitution, on va effectuer une analyse fréquentielle des lettres de ce texte.\\
+		Là encore, il faut connaître la langue du texte d'origine afin que cette méthode fonctionne, mais il faut aussi que le texte soit assez long pour que cela fonctionne.\\
+		\\
+		Voici un extrait du texte qui a été donné par Alice :
+		\begin{lstlisting}
+XY AXJ BYRJMYJ, MQQMVUVXYJ GXR NCBWJR N'UYX LMBY N'PCLLX
+XJ BGR XAVBDBVXYJ, XY IMAX NU AMYNXGMFVX, RUV GX QGMJVX
+NU LUV NU QMGMBR VCEMG. GX VCB DBJ AXJJX QMVJBX NX LMBY
+KUB XAVBDMBJ. MGCVR GX VCB APMYWXM NX ACUGXUV, RXR
+QXYRXXR G'XIIVMEXVXYJ, GXR SCBYJUVXR NX RXR VXBYR RX
+NXGBXVXYJ XJ RXR WXYCUZ RX PXUVJXVXYJ G'UY G'MUJVX. GX
+VCB AVBM MDXA ICVAX QCUV IMBVX DXYBV GXR LMWBABXYR, GXR
+APMGNXXYR XJ GXR MRJVCGCWUXR.
+		\end{lstlisting}
+		En voyant ce texte, Oscar a commencé par calculer le nombre d'apparitions de chaque lettre, dont voici un extrait :\\
+		\begin{tabular}{ | c | c | c | c | c | c | }
+			\hline
+			Lettre & A & B & C & D & E\\ \hline
+			Apparitions & 43 & 99 & 80 & 17 & 8\\
+			\hline
+		\end{tabular}\\
+		\\
+		Oscar retrouve ensuite un tableau de la fréquence d'apparition des lettres dans un texte français. Il trouve alors que la lettre qui apparaît le plus souvent est la lettre 'E'.\\
+		Il cherche donc dans le texte quelle lettre apparaît le plus souvent, et il s'agit du 'X', qui apparaît 242 fois. Oscar peut alors considérer que les 'E' du texte initial ont été remplacés par des 'X'. Il réitère l'opération 26 fois, afin d'obtenir un tableau de substitution dont voici un extrait :\\
+		\begin{tabular}{ | c | c | c | c | c | c | }
+			\hline
+			Lettre initiale & A & B & C & D & E \\ \hline
+			Lettre de remplacement & C & I & L & G & X\\
+			\hline
+		\end{tabular}\\
+		\\
+		À la fin, en modifiant les lettres du texte grâce au tableau qu'il a construit, Oscar obtient ce texte :
+		\begin{lstlisting}
+en cer insrtnr, tpptaoaenr ues dliqrs d'one mtin
+d'flmme er ius ecaigiaenr, en vtce do ctndeutbae, soa
+ue putrae do moa do ptutis alxtu. ue ali gir cerre
+ptarie de mtin hoi ecaigtir. tulas ue ali cftnqet de
+cloueoa, ses pensees u'evvatxeaenr, ues jlinroaes de
+ses aeins se deuieaenr er ses qenloy se feoareaenr u'on
+u'torae. ue ali cait tgec vlace ploa vtiae genia ues
+mtqiciens, ues cftudeens er ues tsralulqoes.
+		\end{lstlisting}
+		Il ne s'agit toujours pas d'un texte en français, mais Oscar remarque que certains mots ressemblent beaucoup à d'autres mots de la langue française, comme par exemple, "mtqiciens" ressemble à "magiciens". Oscar change donc à nouveau son tableau pour prendre en compte ces quelques modifications, et il arrive à la fin à un texte parfaitement lisible :
+		\begin{lstlisting}
+en cet instant, apparurent les doigts d'une main
+d'homme et ils ecrivirent, en face du candelabre, sur
+le platre du mur du palais royal. Le roi vit cette
+partie de main qui ecrivait. Alors le roi changea de
+couleur, ses pensees l'effrayerent, les jointures de
+ses reins se delierent et ses genoux se heurterent l'un
+l'autre. Le roi cria avec force pour faire venir les
+magiciens, les chaldeens et les astrologues.
+		\end{lstlisting}
+		Le chiffrement par substitution appliqué sur un texte en français n'est donc pas suffisamment sécurisé, puisque Oscar a réussi à décrypter le texte envoyé par Alice.
