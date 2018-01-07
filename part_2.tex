@@ -100,7 +100,7 @@ elafinduvingtiemesiecle
 		Oscar a donc réussi à déchiffrer le message d'Alice, car le texte était suffisamment long pour se prêter à l'expérience, mais aussi parce qu'il connaissait la langue d'origine du texte.
 	\section{Cryptanalyse du système de substitution}
 		Pour décrypter un message chiffré par un système de substitution, on va effectuer une analyse fréquentielle des lettres de ce texte.\\
-		Là encore, il faut connaître la langue du texte d'origine afin que cette méthode fonctionne, mais il faut aussi que le texte soit assez long pour que cela fonctionne.\\
+		Là encore, pour que cette méthode fonctionne, il faut que le texte ait été écrit dans une langue qui est connue par l'attaquant, mais il faut aussi et surtout que le texte soit long (voire très long), car durant nos recherches, nous avons remarqué que pour qu'une cryptanalyse pour un système de substitution fonctionne bien, il faut que le texte soit bien plus long que pour une cryptanalyse pour un système de Vigenère. Cela vient principalement du fait que pour le système de Vigenère, on emploie des clés de taille réduite (8 caractères ou moins), là où pour le système de substitution, dans la langue française, la clé est de taille 26 quoi qu'il arrive.\\
 		\\
 		Voici un extrait du texte qui a été donné par Alice :
 		\begin{lstlisting}

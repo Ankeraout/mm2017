@@ -80,7 +80,26 @@
 		\subsection{Algorithme}
 			L'algorithme en soi est relativement simple, il se résume à faire une passe sur chaque caractère du message et à le transformer par le caractère correspondant dans la table de substitution. Pour expliquer cela plus simplement, prenons M[i] le caractère du message initial M à l'indice i, C[i] le caractère du message chiffré à l'indice i, et K[a] le caractère de substitution du caractère a dans la table de substitution K.\\
 			L'obtention du message chiffré se fait donc en une boucle, et on obtient chaque caractère de C ainsi :\\
-			$C[i] = K[M[i]]$
+			$C[i] = K[M[i]]$\\
+			\\
+			Prenons l'exemple d'un message que nous souhaitons transmettre de manière sécurisée en passant par des tiers qui connaissent la cryptanalyse des systèmes de César et de Vigenère. Ce message est : "RAPATRIEMENT".\\
+			\\
+			On commence alors par établir une table de substitution, dans laquelle on va définir par quel lettre chaque lettre sera remplacée : \\
+			\begin{tabular}{ | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | }
+				\hline
+				Normal&A&B&C&D&E&F&G&H&I&J&K&L&M&N&O\\ \hline
+				Substitué&W&X&C&V&B&N&Q&S&D&F&G&H&J&K&L\\
+				\hline
+			\end{tabular}\\
+			\begin{tabular}{ | c | c | c | c | c | c | c | c | c | c | c | c | }
+				\hline
+				Normal&P&Q&R&S&T&U&V&W&X&Y&Z\\ \hline
+				Substitué&M&A&Z&E&R&T&Y&U&I&O&P\\
+				\hline
+			\end{tabular}\\
+			\\
+			Une fois cette table créée, on va remplacer les lettres du messages qui se trouvent dans la première ligne du tableau par les lettres qui se trouvent à la deuxième ligne du tableau.\\
+			Le message final sera alors "ZWMWRZDBJBKR". Il est totalement illisible tel quel, et il est assez petit pour qu'une cryptanalyse ne fonctionne pas dessus.
 		\subsection{Niveau de sécurité}
 			Cet algorithme est d'un niveau de sécurité très faible en général, et surtout si l'on connaît la nature des données chiffrées. Le chiffrement RSA utilisé naïvement est d'ailleurs un système de chiffrement par substitution, car pour un même caractère codé, le caractère chiffré sera le même. Le système de César en est également un cas particulier.
 		\subsection{Cas d'utilisation}
