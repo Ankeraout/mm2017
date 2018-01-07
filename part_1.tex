@@ -44,8 +44,33 @@
 		\subsection{Définition}
 			Le système de César est un cas particulier du système de Vigenère, où la clé est de longueur 1, c'est-à-dire que la clé utilisée pour encoder chaque caractère sera toujours la même. Il constitue également un cas particulier du système de chiffrement par substitution, où les lettres de la clé seraient écrites avec un décalage d'un nombre fixe de positions par rapport à l'alphabet normal. La clé serait donc l'alphabet utilisé pour écrire le message, décalé du nombre susdit.
 			La manière dont on chiffre des données en utilisant ce système est la même que pour le système de Vigenère. Il s'agit donc d'une méthode de chiffrement symétrique.
+		\subsection{Exemple}
+			Imaginons-nous quelques instants à la place de Jules César. Nous souhaitons envoyer un message stratégique à nos troupes, dont nous ne voulons pas que le peuple ennemi (les gaulois) ne prennent connaissance. Ce message, c'est "ASSIEGEZ MASSILIA". Jules César employait souvent cette méthode de chiffrement avec un décalage de 3 lettres, d'après plusieurs sources. Nous allons donc faire de même.\\
+			Pour rendre la tâche plus simple, on décide d'établir une table de substitution pour savoir quel caractère remplacera lequel, une fois notre message chiffré :\\
+			\begin{tabular}{ | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | }
+				\hline
+				Normal&A&B&C&D&E&F&G&H&I&J&K&L&M&N&O\\ \hline
+				Décalé&D&E&F&G&H&I&J&K&L&M&N&O&P&Q&R\\
+				\hline
+			\end{tabular}\\
+			\begin{tabular}{ | c | c | c | c | c | c | c | c | c | c | c | c | }
+				\hline
+				Normal&P&Q&R&S&T&U&V&W&X&Y&Z\\ \hline
+				Décalé&S&T&U&V&W&X&Y&Z&A&B&C\\
+				\hline
+			\end{tabular}\\
+			\\
+			Pour notre message, cela donnera donc :\\
+			\begin{tabular}{ | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | }
+				\hline
+				Normal&A&S&S&I&E&G&E&Z&M&A&S&S&I&L&I&A \\ \hline
+				Chiffré&D&V&V&L&H&J&H&C&P&D&V&V&L&O&L&D \\
+				\hline
+			\end{tabular}\\
+			\\
+			Nous enverrons alors à nos troupes le message "DVVLHJHC PDVVLOLD", qui ne veut rien dire en tant que tel, mais qui prend tout son sens une fois déchiffré par nos troupes. Par contre, il faut avoir convenu le décalage à l'avance...
 		\subsection{Niveau de sécurité}
-			Le niveau de sécurité de cette méthode de chiffrement est très faible, c'est-à-dire qu'il est très facile de retrouver le message d'origine si l'on connaît la nature de ce dernier. La cryptanalyse du système de César est d'ailleurs utilisée dans la cryptanalyse du système de Vigenère, que nous aborderons plus tard.
+			Le niveau de sécurité de cette méthode de chiffrement est très faible, c'est-à-dire qu'il est très facile de retrouver le message d'origine, car généralement, le nombre de décalages possible est très petit (26 pour l'alphabet français). Si l'on considère que l'on ne prendra pas le décalage nul (car sinon cela reviendrait à ne pas chiffrer du tout), il ne reste que 25 possibilités pour une utilisation "classique". Il suffira alors d'écrire le message avec tous les décalages possibles, pour voir parmi la liste des 25 messages le message en clair. Par ailleurs, on peut aussi effectuer une analyse de fréquences d'apparition des caractères, et considérer par exemple, que si le message a été écrit en français, et que la lettre la plus fréquente dans un texte en français est le 'E', alors la lettre la plus fréquente du message doit être un E, et ainsi on peut déduire le décalage qui a été utilisé pour chiffrer le message.
 		\subsection{Cas d'utilisation}
 			L'histoire raconte que le chiffrement de César, comme son nom l'indique, a été initialement inventé par Jules César, un grand empereur de l'époque de l'antiquité. Il aurait employé cette méthode pour transmettre des messages à ses troupes, de manière à ce que même si le message était intercepté par un ennemi, ce dernier ne pourrait pas le comprendre, en raison d'abord de la langue d'origine qui était différente, mais aussi du fait que les suites de lettres inscrites sur le support formaient des mots qui n'existaient pas. Le décalage qu'il employait valait 3, c'est-à-dire que pour chaque lettre du message, il fallait regarder 3 lettres plus loin dans l'alphabet pour trouver la lettre à écrire pour chiffrer le message. Par exemple, lorsque le message à chiffrer contenait un 'A', César écrivait donc un 'D'.
 			De nos jours, du fait de son niveau de sécurité, le chiffrement de César n'est plus utilisé pour chiffrer des données sensibles. En revanche, il constitue un exemple parfait pour une initiation à la cryptographie, car il demeure très simple à comprendre, et le fait qu'il soit symétrique facilite la compréhension.
