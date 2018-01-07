@@ -18,11 +18,28 @@
 			où M\lbrack{i}\rbrack est le caractère à l'indice i du message initial M (on rappelle que l'indice varie entre 0 et n - 1), l est la longueur de la clé de chiffrement, K\lbrack{i \% l}\rbrack est le caractère de la clé de chiffrement à l'indice i modulo l, et j est le nombre de caractères codables dans le message initial. Dans le cadre de cette formule, on définit également l'opérateur \% comme l'opérateur renvoyant le reste de la division euclidienne de la partie gauche par la partie droite.\\
 			L'opération peut être inversée pour obtenir le message initial à partir du message chiffré C et de la clé de chiffrement K, en utilisant la formule suivante :\\
 			\\
-			M\lbrack{i}\rbrack = (C\lbrack{i}\rbrack - K\lbrack{i}\rbrack + j) \% j
+			M\lbrack{i}\rbrack = (C\lbrack{i}\rbrack - K\lbrack{i}\rbrack + j) \% j\\
+			\\
+			Par exemple, si on veut transmettre le message "LES CAROTTES SONT CUITES" avec une clé (convenue à l'avance avec le destinataire) "IMPORTANT", on obtiendra :\\
+			\begin{tabular}{ | c | c | c | c | c | c | c | c | c | c | c | c | }
+				\hline
+				Message & L&E&S&C&A&R&O&T&T&E&S \\ \hline
+				Clé & I&M&P&O&R&T&A&N&T&I&M \\ \hline
+				Message chiffré & T&Q&H&Q&R&K&O&G&M&M&E \\
+				\hline
+			\end{tabular}\\
+			\begin{tabular}{ | c | c | c | c | c | c | c | c | c | c | c | }
+				\hline
+				Message & S&O&N&T&C&U&I&T&E&S \\ \hline
+				Clé & P&O&R&T&A&N&T&I&M&P \\ \hline
+				Message chiffré & H&C&E&M&C&H&B&B&Q&H \\
+				\hline
+			\end{tabular}\\
+			Le message que l'on enverra au destinataire sera donc "TQH QRKOGMME HCEM CHBBQH", ce qui est totalement illisible pour quiconque n'aurait pas la clé de déchiffrement.
 		\subsection{Niveau de sécurité}
-			Dans le cas où la clé de chiffrement est de taille supérieure (inutile) ou égale à la longueur du message, et ne contient pas de répétitions, cet algorithme est réputé pour chiffrer des données de manière inviolable, c'est-à-dire qu'il est impossible de retrouver les données d'origine si on n'a aucune information sur ces dernières, car les données obtenues ressembleront à des données purement aléatoires. En pratique, cette méthode de chiffrement est employée avec une clé de taille inférieure à la taille du message. Dans ce cas-là, il est possible de pratiquer une cryptanalyse si l'on connaît la nature des données initiales. Pour plus d'informations, se référer à la partie sur la cryptanalyse du système de Vigenère.
+			Dans le cas où la clé de chiffrement est de taille supérieure (inutile) ou égale à la longueur du message, et ne contient pas de répétitions, cet algorithme est réputé pour chiffrer des données de manière inviolable, c'est-à-dire qu'il est impossible de retrouver les données d'origine si on n'a aucune information sur ces dernières, car les données obtenues ressembleront à des données purement aléatoires. En pratique, cette méthode de chiffrement est employée avec une clé de taille inférieure à la taille du message. Dans ce cas-là, il est possible de pratiquer une cryptanalyse si l'on connaît la nature des données initiales, et si la clé est vraiment très petite par rapport à la taille du message à chiffrer. Pour plus d'informations, se référer à la partie sur la cryptanalyse du système de Vigenère.
 		\subsection{Cas d'utilisation}
-			D'abord, dans le cas courant, on considère le système de Vigenère comme permettant de coder un message dans un alphabet donné. Si l'on considère que l'alphabet en question est formé de 256 caractères, alors il est possible de coder des octets, car un octet peut prendre $2^8 = 256$ valeurs différentes. En réalité, le système de Vigenère n'est pas considéré comme suffisamment sécurisé pour chiffrer des données sensibles, car pour que ces dernières soient transmises de manière totalement sécurisée, il faudrait que la clé soit aussi longue que le message à coder, ce qui ne présente aucun intérêt. On préférera des algorithmes plus sécurisés avec des longueurs de clés moindres.
+			Dans le cas courant, on considère le système de Vigenère comme permettant de coder un message dans un alphabet donné. Si l'on considère que l'alphabet en question est formé de 256 caractères, alors il est possible de coder des octets, car un octet peut prendre $2^8 = 256$ valeurs différentes. En réalité, le système de Vigenère n'est pas considéré comme suffisamment sécurisé pour chiffrer des données sensibles, car pour que ces dernières soient transmises de manière totalement sécurisée, il faudrait que la clé soit aussi longue que le message à coder, ce qui ne présente aucun intérêt. On préférera des algorithmes plus sécurisés avec des longueurs de clés moindres.
 	\section{Système de César}
 		\subsection{Définition}
 			Le système de César est un cas particulier du système de Vigenère, où la clé est de longueur 1, c'est-à-dire que la clé utilisée pour encoder chaque caractère sera toujours la même. Il constitue également un cas particulier du système de chiffrement par substitution, où les lettres de la clé seraient écrites avec un décalage d'un nombre fixe de positions par rapport à l'alphabet normal. La clé serait donc l'alphabet utilisé pour écrire le message, décalé du nombre susdit.
