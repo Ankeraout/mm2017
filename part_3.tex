@@ -4,7 +4,7 @@
 			Pour trouver tous les nombres premiers entre 2 et n, on commence par créer une liste contenant tous ces nombres.
 			On commence en prenant le premier nombre de la liste, qui est 2. On retire de la liste tous ses multiples à part lui-même (4, 6, 8…). On répète l’expérience en prenant 3, puis 5, etc..
 			Lorsqu’on a pris un nombre supérieur à la racine carrée de n, on ne retirera plus aucun nombre de la liste ; il est donc de ce fait inutile de continuer.
-			À ce stade-là, il ne reste dans la liste que les nombres premiers entre 0 et n. Cette méthode permet à coup sûr de trouver tous les nombres premiers entre 0 et n, mais elle est très coûteuse en terme de mémoire (tableau), et de processeur car on itère sur tous les nombres premiers. Nous avons produit une implémentation de cet algorithme en Java, dans le fichier $CribleEratosthene.java$. Il trouve tous les nombres premiers entre 2 et 1000.
+			À ce stade-là, il ne reste dans la liste que les nombres premiers entre 0 et n. Cette méthode permet à coup sûr de trouver tous les nombres premiers entre 0 et n, mais elle est très coûteuse en terme de mémoire (tableau), et de processeur, car on itère sur tous les nombres premiers. Nous avons produit une implémentation de cet algorithme en Java, dans le fichier $CribleEratosthene.java$. Il trouve tous les nombres premiers entre 2 et 1000.
 			\subsubsection{Algorithme}
 				\begin{lstlisting}
 Fonction Eratosthene(Limite)

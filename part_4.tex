@@ -23,7 +23,7 @@
 		\\
 		$M = C^d \% n$\\
 		\\
-		On peut, en utilisant cette méthode, envoyer des séries de nombres. Dans la réalité, on transmet des octets via RSA. Or les octets ne peuvent prendre que des valeurs allant de 0 à 255 (inclus).\\
+		On peut, en utilisant cette méthode, envoyer des séries de nombres. Dans la réalité, on transmet des octets via RSA. Or, les octets ne peuvent prendre que des valeurs allant de 0 à 255 (inclus).\\
 		\\
 		Si l'on chiffre un octet en utilisant cette méthode, il n'y aura donc que 256 possibilités, et le chiffrement RSA reviendrait alors à un chiffrement par substitution. Il serait alors facile de retrouver le message initial, par cryptanalyse.\\
 		Dans la réalité, le chiffrement de données par RSA n'est pas réalisé de cette manière (que l'on peut qualifier de naïve).\\
@@ -42,15 +42,15 @@
 		\\
 		Lors du déchiffrement, ces nombres seront reconvertis en valeurs numériques en prenant des blocs de 3 chiffres par 3, pour reconstituer ensuite les valeurs ASCII et retrouver le message original.\\
 		C'est grâce à ce processus que le message est sécurisé lors de sa transmission, car le chiffrement ne revient alors plus à un chiffrement par substitution, et il y a alors n blocs codables, ce qui fait que l'on utilisera pleinement les possibilités qu'offre RSA.\\
-		Pour chiffrer un message, il faut tout d'abord le découper en plusieurs blocs supérieur à 2.
+		Pour chiffrer un message, il faut tout d'abord le découper en plusieurs blocs supérieurs à 2.
 	\section{Niveau de sécurité}
-		RSA étant un algorithme de chiffrement asymétrique, la clé permettant de déchiffrer un message chiffré en utilisant cet algorithme (clé privée) n'est jamais transmise. Or il est impossible de déchiffrer un message intercepté si on ne possède pas la clé privée de la personne qui était supposée recevoir ce message (et le déchiffrer). C'est grâce à cela que RSA est un algorithme particulièrement réputé par sa sécurité.\\
+		RSA étant un algorithme de chiffrement asymétrique, la clé permettant de déchiffrer un message chiffré en utilisant cet algorithme (clé privée) n'est jamais transmise. Or, il est impossible de déchiffrer un message intercepté si on ne possède pas la clé privée de la personne qui était supposée recevoir ce message (et le déchiffrer). C'est grâce à cela que RSA est un algorithme particulièrement réputé par sa sécurité.\\
 		RSA n'est pourtant pas un algorithme invulnérable, car pour le casser, il "suffit" de factoriser la valeur $n$, commune aux clés privées et publiques d'un échange RSA.\\
 		En factorisant $n$, le tiers ayant intercepté le message devient capable de reconstituer la clé privée permettant de déchiffrer le message.\\
 		Seulement, la factorisation de $n$ est un processus excessivement compliqué si les nombres $p$ et $q$ sont des nombres premiers très grands.\\
 		À l'heure actuelle, en raison de la relative faible puissance de nos ordinateurs, il est très difficile de factoriser un très grand nombre composé si ses constituants sont de très grands nombres premiers.
 	\section{Efficacité}
-		Une des grandes forces du RSA et qu'il est encore bien protégé à l'heure actuelle (en utilisant à minima 2048 bits). Cependant ce système de chiffrement n'est pas une fin en soi. Il possède plusieurs désavantages, notamment sa lenteur et sa consommation de mémoire, qui augmentent avec la grandeur des nombres qu'il manipule. Plus on avance dans le temps, et plus cet algorithme devient donc consommateur de ressources. Il permet malgré tout le chiffrement de messages de manière très fiable, et en général il est plutôt utilisé pour sécurisé l'échange de clés pour des algorithmes de chiffrement symétriques, beaucoup plus rapides et moins gourmands en terme de ressources système.\\
+		Une des grandes forces du RSA et qu'il est encore bien protégé à l'heure actuelle (en utilisant à minima 2048 bits). Cependant, ce système de chiffrement n'est pas une fin en soi. Il possède plusieurs désavantages, notamment sa lenteur et sa consommation de mémoire, qui augmentent avec la grandeur des nombres qu'il manipule. Plus on avance dans le temps, et plus cet algorithme devient donc consommateur de ressources. Il permet malgré tout le chiffrement de messages de manière très fiable, et en général, il est plutôt utilisé pour sécuriser l'échange de clés pour des algorithmes de chiffrement symétriques, beaucoup plus rapides et moins gourmands en terme de ressources système.\\
 		\\
 		Pour se rendre compte de l'impact de cet algorithme sur les performances, voici un test de chiffrement de fichiers en utilisant RSA avec une clé de 2048 bits sur un ordinateur bas/moyen de gamme :\\
 			Test effectué avec :\\
@@ -62,7 +62,7 @@
 			Pour un fichier de 9,16Mo :\\
 				- 74583ms de temps d'exécution\\
 	\section{Cas d'utilisation}
-		Le chiffrement RSA est maintenant utilisé dans quasiment tout les systèmes qui nécessitent le chiffrement de données. On peut par exemple retrouver son utilisation dans le système bancaire, le web, les cartes à puces, etc..
+		Le chiffrement RSA est maintenant utilisé dans quasiment tous les systèmes qui nécessitent le chiffrement de données. On peut par exemple retrouver son utilisation dans le système bancaire, le web, les cartes à puce, etc..
 		Comme dit précédemment, le RSA étant bien trop coûteux en terme de temps de chiffrement, il est principalement utilisé pour chiffrer des clés pour des algorithmes de chiffrement symétrique et ce sont ces derniers qui serviront à chiffrer l'information.\\
 		\\
 		Parmi les utilisations les plus courantes de cet algorithme, il y a également les certificats.\\
