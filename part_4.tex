@@ -35,7 +35,20 @@
 		Tout l'intérêt du système RSA repose sur le fait qu'à l'heure actuelle il est pratiquement impossible de retrouver dans un temps raisonnable p et q à partir de n si celui-ci est très grand. La personne qui détient la clé privé est donc la seule à pouvoir déchiffrer le message dans un temps raisonnable. De plus, elle n'a jamais à transmettre les entiers p et q, ce qui empêche leur piratage.
 		
 	\section{Efficacité}
-		Une des grandes forces du RSA et qu'il est incroyablement rapide et encore bien protégé à actuellement (en utilisant à minima 2048 bits).
+		Une des grandes forces du RSA et qu'il est encore bien protégé à l'heure actuelle (en utilisant à minima 2048 bits). Cependant ce système de chiffrement n'est pas une fin en soit. Il reste tout de même très long d'exécution et ne permet donc pas le chiffrement de très grands messages.\\
+		
+		Exemple du temps d'exécution de l'algorithme RSA-2048 :\\
+			Test effectué avec :\\
+			- Processeur : Intel(R) Core(TM) 2 CPU T5200 1,6GHZ.
+			- RAM : 1,00 Go.
+			
+			Pour un fichier de 2,58Mo :\\
+				- 21621ms de temps d'exécution 
+			Pour un fichier de 9,16Mo :\\
+				- 74583ms de temps d'exécution\\
+				
+		Le RSA n'est donc pas fait pour chiffrer de très grandes quantités d'information.
 		
 	\section{Cas d'utilisation}
-		Le chiffrement RSA est maintenant utilisé dans quasiment tout les systèmes qui nécessitent le chiffrement de données. On peut par exemple retrouver son utilisation dans le système bancaire, les cartes cartes SIM, etc.
+		Le chiffrement RSA est maintenant utilisé dans quasiment tout les systèmes qui nécessitent le chiffrement de données. On peut par exemple retrouver son utilisation dans le système bancaire, le web, les cartes à puces, etc..
+		Comme dit précédemment, le RSA étant bien trop coûteux en terme de temps de chiffrement, il est principalement utilisé pour chiffrer des clés de chiffrements symétrique très grande et ce sont ces clés qui serviront à chiffrer l'information. Toute fois elle
